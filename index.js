@@ -6,33 +6,18 @@ const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 const Engineer = require('./lib/Engineer');
 
+const internList = [];
+const internCardList = [];
+const managerList = [];
+const managerCardList = [];
+const engineerList = [];
+const engineerCardList = [];
+
+// Add recursive ability to inquirer
 inquirer.registerPrompt('recursive', require('inquirer-recursive'));
 
 // Prompt User for Team Inputs
 getInput = () => {
-    // inquirer.prompt([
-    //     {
-    //         type: 'input',
-    //         name: 'Name',
-    //         message: 'Employee Name: '
-    //     },
-    //     {
-    //         type: 'input',
-    //         name: 'email',
-    //         message: 'Employee email: '
-    //     },
-    //     {
-    //         type: 'input',
-    //         name: 'id',
-    //         message: 'Employee ID: '
-    //     },
-    //     {
-    //         type: 'list',
-    //         choices: [Manager, Engineer, Intern],
-    //         name: 'role',
-    //         message: 'Employee Role: '
-    //     }
-    // ])
     inquirer.prompt([{
         type: 'recursive',
         message: 'Add a team member?',
@@ -40,7 +25,7 @@ getInput = () => {
         prompts: [
             {
                 type: 'input',
-                name: 'Name',
+                name: 'name',
                 message: 'Employee Name: '
             },
             {
@@ -63,9 +48,8 @@ getInput = () => {
                 type: 'input',
                 name: 'officeNumber',
                 message: 'Office Number: ',
-                when: function (response) {
-                    if(response.role == 'Manager'){
-                        console.log('hi');
+                when: function (data) {
+                    if(data.role == 'Manager'){
                         return true;
                     }
                 }
@@ -74,9 +58,8 @@ getInput = () => {
                 type: 'input',
                 name: 'github',
                 message: 'Github Username: ',
-                when: function (response) {
-                    if(response.role == 'Engineer'){
-                        console.log('hi');
+                when: function (data) {
+                    if(data.role == 'Engineer'){
                         return true;
                     }
                 }
@@ -85,59 +68,133 @@ getInput = () => {
                 type: 'input',
                 name: 'school',
                 message: 'School: ',
-                when: function (response) {
-                    if(response.role == 'Intern'){
-                        console.log('hi');
+                when: function (data) {
+                    if(data.role == 'Intern'){
+                        // const intern = new Intern(response.teamMember.name);
                         return true;
                     }
                 }
             }
         ]
     }])
-    // Generate HTML Elements with info from response
+
+    // Generate Team members from classes with info from response
     .then((response) => {
-        let fileName = './src/index.HTML'
-        fs.appendFile(
-            fileName,
-            `
-            <div class="card l3 m6 s12">
-                <div class="card-header">
-                    Featured
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-            `,
-            (err) => {
-                if (err) throw err;
+        for (let i=0; i<response.teamMember.length;i++) {
+            // creates new employee
+            const employee = new Employee(response.teamMember[i].name, response.teamMember[i].id, response.teamMember[i].email);
+            // console.log(employee);
+            
+            // creates new intern
+            if (response.teamMember[i].role == 'Intern') {
+                const intern = new Intern(response.teamMember[i].name, response.teamMember[i].id, response.teamMember[i].email, response.teamMember[i].school);
+                // console.log(intern);
+                internList.push(intern);
+            // creates new engineer
+            } else if (response.teamMember[i].role == 'Engineer') {
+                const engineer = new Engineer(response.teamMember[i].name, response.teamMember[i].id, response.teamMember[i].email, response.teamMember[i].github);
+                // console.log(engineer);
+                engineerList.push(engineer);
+                
+            // creates new manager
+            } else if (response.teamMember[i].role == 'Manager') {
+                const manager = new Manager(response.teamMember[i].name, response.teamMember[i].id, response.teamMember[i].email, response.teamMember[i].officeNumber);
+                // console.log(manager);
+                managerList.push(manager);
+
             }
-        )
+        }
+        createHTML();       
     })
 }
+
+createHTML = () => {
+    // HTML Elements with info from response
+    let fileName = './src/index.HTML';
+    internList.forEach((intern => {
+        const internCard = `
+        <div class="card" style="width: 18rem;">
+            <div class = 'card-head-custom'>
+                <h3>${intern.name}</h3>
+                <h5>${'Intern'}</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">${intern.id}</p>
+                <p class="card-text">${intern.email}</p>
+                <p class="card-text">${intern.school}</p>
+            </div>
+        </div>
+        `;
+        internCardList.push(internCard);
+    }));
+
+    engineerList.forEach((engineer => {
+        const engineerCard = `
+        <div class="card" style="width: 18rem;">
+            <div class = 'card-head-custom'>
+                <h3>${engineer.name}</h3>
+                <h5>${'Engineer'}</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">${engineer.id}</p>
+                <p class="card-text">${engineer.email}</p>
+                <p class="card-text">${engineer.school}</p>
+            </div>
+        </div>
+        `;
+        engineerCardList.push(engineerCard);
+    }));
     
-// addMember = () => {
-//     inquirer.prompt(
-//         {
-//             type: 'list',
-//             choices: ['yes', 'no'],
-//             name: 'addAnother',
-//             message: 'Add another team member? '
-//         }
-//     )
-//     .then((addTeamMember) => {
-//         if (addTeamMember.addAnother == 'yes') {
-//         // Call function to restart prompts
-//             getInput();
-//         } else {
-//             return;
-//         }  
-//     })
-// }
+    managerList.forEach((manager => {
+        const managerCard = `
+        <div class="card" style="width: 18rem;">
+            <div class = 'card-head-custom'>
+                <h3>${manager.name}</h3>
+                <h5>${'Manager'}</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">${manager.id}</p>
+                <p class="card-text">${manager.email}</p>
+                <p class="card-text">${manager.school}</p>
+            </div>
+        </div>
+        `;
+        managerCardList.push(managerCard);
+    }));
+
+    fs.writeFile(            
+        fileName,
+        `
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <title>Team Generator</title>
+            <meta name="description" content="">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+            <link rel="stylesheet" href="./style.css">
+        </head>
+        <body class = 'container'>
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                  <h1 class="display-4">Team Profile Generator</h1>
+                </div>
+            </div>
+            <main>
+                 ${internCardList}
+                 ${engineerCardList}
+                 ${managerCardList}
+            </main>
+        </body>
+    </html>
+    
+        `,
+        (err) => {
+            if (err) throw err;
+        }
+    )
+}
 
 getInput();
-// addMember();
-
-

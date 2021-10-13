@@ -1,0 +1,23 @@
+.card-head-custom {
+    background-color: rgb(109, 166, 168);
+    padding: 12px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card {
+    margin: 10px;
+    padding: 0;
+    border-radius: 10px;
+    box-shadow: 0px 0px 8px rgba(126, 126, 126, 0.50);
+}
+
+body {
+    margin-top: 25px;
+}
+
+h1 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+

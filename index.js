@@ -114,14 +114,14 @@ createHTML = () => {
     internList.forEach((intern => {
         const internCard = `
         <div class="card" style="width: 18rem;">
-            <div class = 'card-head-custom'>
+            <div class = 'card-body card-head-custom'>
                 <h3>${intern.name}</h3>
-                <h5>${'Intern'}</h5>
+                <h6>${'Intern'}</h6>
             </div>
             <div class="card-body">
-                <p class="card-text">${intern.id}</p>
-                <p class="card-text">${intern.email}</p>
-                <p class="card-text">${intern.school}</p>
+                <p class="card-text">ID: ${intern.id}</p>
+                <p class="card-text">email: ${intern.email}</p>
+                <p class="card-text">School: ${intern.school}</p>
             </div>
         </div>
         `;
@@ -131,14 +131,14 @@ createHTML = () => {
     engineerList.forEach((engineer => {
         const engineerCard = `
         <div class="card" style="width: 18rem;">
-            <div class = 'card-head-custom'>
+            <div class = 'card-body card-head-custom'>
                 <h3>${engineer.name}</h3>
-                <h5>${'Engineer'}</h5>
+                <h6>${'Engineer'}</h6>
             </div>
             <div class="card-body">
-                <p class="card-text">${engineer.id}</p>
-                <p class="card-text">${engineer.email}</p>
-                <p class="card-text">${engineer.school}</p>
+                <p class="card-text">ID: ${engineer.id}</p>
+                <p class="card-text">email: ${engineer.email}</p>
+                <p>Github: <a href="www.github.com/${engineer.github}">${engineer.github}</a></p>
             </div>
         </div>
         `;
@@ -148,14 +148,14 @@ createHTML = () => {
     managerList.forEach((manager => {
         const managerCard = `
         <div class="card" style="width: 18rem;">
-            <div class = 'card-head-custom'>
+            <div class = 'card-body card-head-custom'>
                 <h3>${manager.name}</h3>
-                <h5>${'Manager'}</h5>
+                <h6>${'Manager'}</h6>
             </div>
             <div class="card-body">
-                <p class="card-text">${manager.id}</p>
-                <p class="card-text">${manager.email}</p>
-                <p class="card-text">${manager.school}</p>
+                <p class="card-text">ID: ${manager.id}</p>
+                <p class="card-text">email: ${manager.email}</p>
+                <p class="card-text">Office: ${manager.officeNumber}</p>
             </div>
         </div>
         `;
@@ -182,10 +182,10 @@ createHTML = () => {
                   <h1 class="display-4">Team Profile Generator</h1>
                 </div>
             </div>
-            <main>
-                 ${internCardList}
-                 ${engineerCardList}
-                 ${managerCardList}
+            <main class = 'row'>
+                ${internCardList}
+                ${engineerCardList}
+                ${managerCardList}
             </main>
         </body>
     </html>

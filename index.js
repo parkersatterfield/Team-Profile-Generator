@@ -108,15 +108,15 @@ getInput = () => {
     })
 }
 
+// HTML Elements with info from response
 createHTML = () => {
-    // HTML Elements with info from response
     let fileName = './src/index.HTML';
     internList.forEach((intern => {
         const internCard = `
         <div class="card" style="width: 18rem;">
             <div class = 'card-body card-head-custom'>
                 <h3>${intern.name}</h3>
-                <h6>${'Intern'}</h6>
+                <h6>✍️ Intern</h6>
             </div>
             <div class="card-body">
                 <p class="card-text">ID: ${intern.id}</p>
@@ -126,6 +126,7 @@ createHTML = () => {
         </div>
         `;
         internCardList.push(internCard);
+        // console.log(internCardList2);
     }));
 
     engineerList.forEach((engineer => {
@@ -133,12 +134,12 @@ createHTML = () => {
         <div class="card" style="width: 18rem;">
             <div class = 'card-body card-head-custom'>
                 <h3>${engineer.name}</h3>
-                <h6>${'Engineer'}</h6>
+                <h6>🤖 Engineer</h6>
             </div>
             <div class="card-body">
                 <p class="card-text">ID: ${engineer.id}</p>
                 <p class='card-text'>Email: <a href="mailto: ${engineer.email}">${engineer.email}</a></p>
-                <p class='card-text'>Github: <a href="www.github.com/${engineer.github}" target= "_blank">${engineer.github}</a></p>
+                <p class='card-text'>Github: <a href="https://www.github.com/${engineer.gitHub}" target= "_blank">${engineer.gitHub}</a></p>
             </div>
         </div>
         `;
@@ -150,7 +151,7 @@ createHTML = () => {
         <div class="card" style="width: 18rem;">
             <div class = 'card-body card-head-custom'>
                 <h3>${manager.name}</h3>
-                <h6>${'Manager'}</h6>
+                <h6>🏌️‍♂️ Manager</h6>
             </div>
             <div class="card-body">
                 <p class="card-text">ID: ${manager.id}</p>
@@ -161,6 +162,10 @@ createHTML = () => {
         `;
         managerCardList.push(managerCard);
     }));
+
+    const internCardList2 = internCardList.join('\n \n');
+    const engineerCardList2 = engineerCardList.join('\n \n');
+    const managerCardList2 = managerCardList.join('\n \n');
 
     fs.writeFile(            
         fileName,
@@ -183,9 +188,9 @@ createHTML = () => {
                 </div>
             </div>
             <main class = 'row'>
-                ${internCardList}
-                ${engineerCardList}
-                ${managerCardList}
+                ${managerCardList2}
+                ${engineerCardList2}
+                ${internCardList2}
             </main>
         </body>
     </html>

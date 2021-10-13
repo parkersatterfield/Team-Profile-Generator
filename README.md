@@ -1,8 +1,13 @@
 # **Team-Profile-Generator**
 
-### *This app is a Team Profile Page generator that takes user input from the command line and creates an index.html page with cards for each team member that a user inputs.* 
+### *This app is a Team Profile Page Generator that takes user input from the command line and creates an index.html page with cards for each team member that a user inputs.* 
 
 ## [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) 
+
+## Mock Ups
+![Mock Up](./src/images/mock.png)  
+![Mock Up](./src/images/gif.gif)  
+Video Link: https://drive.google.com/file/d/1NyHIUgLEQw1jP4LcxKoTL0ZCU6VCnX8O/view?usp=sharing
 
 ## Table of Contents 
 
@@ -20,6 +25,13 @@
 
 1. Download the app from my repo.
 2. Run npm i to install all required packages (jest for testing, inquirer and inquirer-recursive for user input).
+```
+npm i
+```
+3. Run command 
+```
+node index.js
+```
 
 ## Usage 
 
@@ -31,7 +43,7 @@ Just myself on this one.
 
 ## Test 
 
-![video](./Develop/ex.GIF)
+This application utilizes Jest for testing. Test files are located in the tests folder ( ./tests). 
 
 ## Questions 
 

@@ -5,8 +5,13 @@
 ## [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) 
 
 ## Mock Ups
+### Result
 ![Mock Up](./src/images/mock.png)  
-![Mock Up](./src/images/gif.gif)  
+### Input Video
+![Mock Up](./src/images/input.gif)  
+### Test Video
+![Mock Up](./src/images/tests.gif)  
+
 Video Link: https://drive.google.com/file/d/1NyHIUgLEQw1jP4LcxKoTL0ZCU6VCnX8O/view?usp=sharing
 
 ## Table of Contents 
@@ -43,7 +48,10 @@ Just myself on this one.
 
 ## Test 
 
-This application utilizes Jest for testing. Test files are located in the tests folder ( ./tests). 
+This application utilizes Jest for testing. Test files are located in the tests folder ( ./tests). Testing can be invoked using the command below.
+```
+npm run test
+```
 
 ## Questions 
 

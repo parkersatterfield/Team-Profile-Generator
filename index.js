@@ -120,7 +120,7 @@ createHTML = () => {
             </div>
             <div class="card-body">
                 <p class="card-text">ID: ${intern.id}</p>
-                <p class="card-text">email: ${intern.email}</p>
+                <p class='card-text'>Email: <a href="mailto: ${intern.email}">${intern.email}</a></p>
                 <p class="card-text">School: ${intern.school}</p>
             </div>
         </div>
@@ -137,8 +137,8 @@ createHTML = () => {
             </div>
             <div class="card-body">
                 <p class="card-text">ID: ${engineer.id}</p>
-                <p class="card-text">email: ${engineer.email}</p>
-                <p>Github: <a href="www.github.com/${engineer.github}">${engineer.github}</a></p>
+                <p class='card-text'>Email: <a href="mailto: ${engineer.email}">${engineer.email}</a></p>
+                <p class='card-text'>Github: <a href="www.github.com/${engineer.github}" target= "_blank">${engineer.github}</a></p>
             </div>
         </div>
         `;
@@ -154,7 +154,7 @@ createHTML = () => {
             </div>
             <div class="card-body">
                 <p class="card-text">ID: ${manager.id}</p>
-                <p class="card-text">email: ${manager.email}</p>
+                <p class='card-text'>Email: <a href="mailto: ${manager.email}">${manager.email}</a></p>
                 <p class="card-text">Office: ${manager.officeNumber}</p>
             </div>
         </div>
